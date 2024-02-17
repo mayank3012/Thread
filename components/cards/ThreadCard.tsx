@@ -2,25 +2,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 interface IProps {
-    key: String,
-    id: String,
-    content: String,
+    key: string,
+    id: string,
+    content: string,
     author: {
-        name: String,
-        image: String,
-        id: String
+        name: string,
+        image: string,
+        id: string
     },
-    currentUserId: String,
-    parentId: String,
-    createdAt: String,
+    currentUserId: string,
+    parentId: string,
+    createdAt: string,
     community: {
-        id: String,
-        name: String,
-        image: String
+        id: string,
+        name: string,
+        image: string
     } | null,
     comments: [
         author: {
-            image: String
+            image: string
         }
     ],
     isComment: boolean
@@ -83,7 +83,7 @@ const ThreadCard = ({
                     <div className='flex item-center'>
                         {comments.slice(0, 3).map((item: any, index: any) => {
                             return (
-                                <div className='relative z-${comments.length - index} -mr-3'>
+                                <div className='relative z-${comments.length - index} -mr-3' key={index}>
                                     <Image src={item.author.image}
                                         width={25}
                                         height={25}

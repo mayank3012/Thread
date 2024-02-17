@@ -36,9 +36,7 @@ const Topbar = () => {
                                 <p className='text-light-1 max-nav-sm:hidden'>Logout</p>
                             </div>
                         </SignOutButton>
-                        <OrganizationSwitcher
-                            appearance={dark}
-                        />
+
                     </div>
                 </SignedIn>
             </div>

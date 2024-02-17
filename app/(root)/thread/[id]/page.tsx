@@ -51,6 +51,7 @@ const page = async ({ params }: { params: { id: string } }) => {
                             commentId={JSON.parse(JSON.stringify(comment?._id)) || ''}
                             currentUserId={JSON.parse(JSON.stringify(userInfo?._id)) || ''}
                             currentUserImg={currentUser1.imageUrl}
+                            commentDepth={0}
                         />
                     )
                 })}

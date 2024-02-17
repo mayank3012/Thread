@@ -6,6 +6,7 @@ import { profileTabs } from '@/constants'
 import { fecthProfileDataByUserId } from '@/lib/actions/thread.action'
 import TabsContent from '../shared/TabsContent';
 import ThreadCard from './ThreadCard'
+import CommentCard from './CommentCard'
 
 interface IProps {
     user: {
@@ -23,18 +24,33 @@ const Profile = async ({ user }: IProps) => {
     const posts = thread.filter((item: any) => !item.parentId);
     const replies = thread.filter((item: any) => item.parentId);
 
-    const threadCard = (item: any) => {
-        return <ThreadCard
-            key={item._id}
-            id={item._id}
-            content={item.text}
-            author={item.author}
-            currentUserId={user?._id}
-            parentId={item.parentId}
-            createdAt={item.createdAt}
-            community={item.community}
-            comments={item.children}
-        />
+    const threadCard = (item: any, isComment = false) => {
+        if (!isComment) {
+            return <ThreadCard
+                key={item._id}
+                id={item._id}
+                content={item.text}
+                author={item.author}
+                currentUserId={user?._id}
+                parentId={item.parentId}
+                createdAt={item.createdAt}
+                community={item.community}
+                comments={item.children}
+                isComment={false}
+            />
+        }
+        else {
+            return (<CommentCard
+                author={item.author}
+                comment={item.text}
+                key={`${item._id}`}
+                replies={item.children}
+                commentId={JSON.parse(JSON.stringify(item?._id)) || ''}
+                currentUserId={JSON.parse(JSON.stringify(user?._id)) || ''}
+                currentUserImg={user?.image}
+                commentDepth={2}
+            />)
+        }
     }
 
     return (
@@ -87,7 +103,7 @@ const Profile = async ({ user }: IProps) => {
                                     :
                                     replies && replies.length > 0 ?
                                         replies.map((item: any) => {
-                                            return threadCard(item);
+                                            return threadCard(item, true);
                                         })
                                         :
                                         <h2>loading</h2>

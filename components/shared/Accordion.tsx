@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion"
 import { ReactNode } from "react"
 interface IProps {
-    type: string,
+    type: "single" | "multiple",
     value: string,
     accordionTriggerClassName: string,
     accordionTrigger: string,
